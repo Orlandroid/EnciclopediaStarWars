@@ -1,9 +1,10 @@
 package com.example.androidbase.domain
 
-import com.example.androidbase.domain.entities.remote.UsersResponse
+import com.example.androidbase.domain.entities.remote.PeopleResponse
+
 
 
 interface RemoteDataSource {
 
-    suspend fun getUser(): UsersResponse
+    suspend fun getPeople(): PeopleResponse
 }

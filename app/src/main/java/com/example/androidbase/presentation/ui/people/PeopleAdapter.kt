@@ -1,35 +1,32 @@
-package com.example.androidbase.presentation.ui.users
+package com.example.androidbase.presentation.ui.people
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.androidbase.domain.entities.remote.User
+import com.example.androidbase.domain.entities.remote.People
 import com.example.androidbase.databinding.ItemUserBinding
 
 
-class UserAdapter :
-    RecyclerView.Adapter<UserAdapter.ViewHolder>() {
+class PeopleAdapter :
+    RecyclerView.Adapter<PeopleAdapter.ViewHolder>() {
 
-    private var listOfCategories: List<User> = arrayListOf()
+    private var listOfCategories: List<People> = arrayListOf()
 
-    fun setData(lista: List<User>) {
+    fun setData(lista: List<People>) {
         listOfCategories = lista
         notifyDataSetChanged()
     }
 
 
     class ViewHolder(private val binding: ItemUserBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(user: User) = with(binding) {
-            tvNombre.text = user.name
-            tvCorreo.text = user.email
-            tvNumero.text = user.number.toString()
-            tvId.text = user._id
+        fun bind(people: People) = with(binding) {
+
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val binding = ItemUserBinding.inflate(layoutInflater,parent,false)
+        val binding = ItemUserBinding.inflate(layoutInflater, parent, false)
         return ViewHolder(binding)
     }
 
