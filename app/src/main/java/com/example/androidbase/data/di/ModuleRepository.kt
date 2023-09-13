@@ -1,6 +1,9 @@
 package com.example.androidbase.data.di
 
 import com.example.androidbase.data.Repository
+import com.example.androidbase.data.remote.api.DummyJsonApi
+import com.example.androidbase.data.remote.login.LoginRepository
+import com.example.androidbase.data.remote.login.LoginRepositoryImp
 import com.example.androidbase.domain.LocalDataSource
 import com.example.androidbase.domain.RemoteDataSource
 import dagger.Module
@@ -21,4 +24,8 @@ object ModuleRepository {
         localDataSource: LocalDataSource,
         remoteDataSource: RemoteDataSource
     ): Repository = Repository(localDataSource, remoteDataSource)
+
+    @Singleton
+    @Provides
+    fun provideLoginRepository(api: DummyJsonApi): LoginRepository = LoginRepositoryImp(api)
 }

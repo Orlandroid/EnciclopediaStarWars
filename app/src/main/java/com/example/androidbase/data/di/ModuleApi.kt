@@ -1,7 +1,7 @@
 package com.example.androidbase.data.di
 
 
-import com.example.androidbase.data.remote.Api
+import com.example.androidbase.data.remote.api.DummyJsonApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,7 +19,7 @@ import javax.inject.Singleton
 object ModuleApi {
 
 
-    private const val BASE_URL = "https://swapi.dev/api/"
+    private const val BASE_URL_DUMMY_JSON = "https://dummyjson.com/"
 
     @Singleton
     @Provides
@@ -39,15 +39,15 @@ object ModuleApi {
     @Singleton
     @Provides
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
-        .baseUrl(BASE_URL)
+        .baseUrl(BASE_URL_DUMMY_JSON)
         .addConverterFactory(GsonConverterFactory.create())
         .client(okHttpClient)
         .build()
 
     @Singleton
     @Provides
-    fun provideApiService(retrofit: Retrofit): Api =
-        retrofit.create(Api::class.java)
+    fun provideApiService(retrofit: Retrofit): DummyJsonApi =
+        retrofit.create(DummyJsonApi::class.java)
 
 
 }

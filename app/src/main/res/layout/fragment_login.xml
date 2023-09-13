@@ -33,7 +33,7 @@
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="32dp"
                 android:layout_marginEnd="24dp"
-                android:hint="@string/email_or_phone_number"
+                android:hint="@string/usuario"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/iv_applogo_login">
@@ -56,6 +56,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="24dp"
                 android:hint="@string/password"
+                app:endIconMode="password_toggle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/til_emailormobile_view">
@@ -79,9 +80,9 @@
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="20dp"
                 android:clickable="true"
+                android:enabled="false"
                 android:focusable="true"
                 android:text="@string/log_in"
-                app:backgroundTint="@color/colorbgbutton"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/til_password_viewlogin" />

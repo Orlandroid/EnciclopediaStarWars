@@ -4,8 +4,11 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
 import android.view.View
+import android.widget.EditText
 import android.widget.ImageView
 import androidx.annotation.ColorRes
+import androidx.core.widget.doOnTextChanged
+import androidx.databinding.adapters.TextViewBindingAdapter.OnTextChanged
 import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
 
@@ -49,6 +52,16 @@ fun View.takeScreenshot(): Bitmap {
     }
     this.draw(canvas)
     return bitmap
+}
+
+fun EditText.obtainText(): String {
+    return text.toString().trim()
+}
+
+fun EditText.onTextChanged(onTextChanged: () -> Unit) {
+    doOnTextChanged { text, start, before, count ->
+        onTextChanged.invoke()
+    }
 }
 
 

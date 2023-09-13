@@ -12,6 +12,7 @@ import okio.IOException
 import retrofit2.HttpException
 import java.net.SocketTimeoutException
 import com.example.androidbase.domain.state.Result
+import com.example.androidbase.presentation.extensions.getErrorObject
 
 abstract class BaseViewModel constructor(
     protected val coroutineDispatchers: CoroutineDispatchers,
@@ -34,7 +35,7 @@ abstract class BaseViewModel constructor(
                 withContext(coroutineDispatchers.main) {
                     result.value = Result.Loading
                 }
-                if (!networkHelper.isNetworkConnected()){
+                if (!networkHelper.isNetworkConnected()) {
                     result.value = Result.ErrorNetwork("")
                     return@launch
                 }
@@ -45,17 +46,18 @@ abstract class BaseViewModel constructor(
                     Log.e("ApiCalls", "Call error: ${e.localizedMessage} code:$e", e.cause)
                     when (e) {
                         is HttpException -> {
-                            val errorBody = e.response()?.errorBody()
+                            val errorBody = e.response()?.errorBody()?.charStream()?.readText()
                             val errorCode = e.response()?.code()
                             result.value = Result.Error(
                                 error = e.message(),
                                 errorCode = errorCode ?: -1,
-                                errorBody = errorBody.toString()
+                                errorBody = errorBody ?: ""
                             )
-                            Log.w("Call error :","code:$errorCode")
                         }
+
                         is SocketTimeoutException -> result.value =
                             Result.Error(ErrorType.TIMEOUT.name)
+
                         is IOException -> result.value = Result.Error(ErrorType.NETWORK.name)
                         else -> result.value = Result.Error(ErrorType.UNKNOWN.name)
                     }
