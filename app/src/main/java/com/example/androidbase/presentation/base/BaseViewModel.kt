@@ -5,14 +5,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.androidbase.data.di.CoroutineDispatchers
+import com.example.androidbase.domain.state.Result
 import com.example.androidbase.presentation.helpers.NetworkHelper
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import okio.IOException
 import retrofit2.HttpException
 import java.net.SocketTimeoutException
-import com.example.androidbase.domain.state.Result
-import com.example.androidbase.presentation.extensions.getErrorObject
 
 abstract class BaseViewModel constructor(
     protected val coroutineDispatchers: CoroutineDispatchers,
@@ -55,8 +54,7 @@ abstract class BaseViewModel constructor(
                             )
                         }
 
-                        is SocketTimeoutException -> result.value =
-                            Result.Error(ErrorType.TIMEOUT.name)
+                        is SocketTimeoutException -> result.value = Result.SocketTimeoutException()
 
                         is IOException -> result.value = Result.Error(ErrorType.NETWORK.name)
                         else -> result.value = Result.Error(ErrorType.UNKNOWN.name)

@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import com.example.androidbase.presentation.extensions.hideProgress
+import com.example.presentation.ui.MainActivity
 
 abstract class BaseFragment<ViewBinding : ViewDataBinding>(@LayoutRes protected val contentLayoutId: Int) :
     Fragment() {
@@ -31,10 +32,20 @@ abstract class BaseFragment<ViewBinding : ViewDataBinding>(@LayoutRes protected 
 
     }
 
+    open fun configureToolbar() = MainActivity.ToolbarConfiguration()
+
+    open fun configSearchView() = MainActivity.SearchViewConfig()
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpUi()
         observerViewModel()
+        (requireActivity() as MainActivity).apply {
+            setToolbarConfiguration(configureToolbar())
+            invalidateOptionsMenu()
+            showSearchView(configSearchView())
+        }
     }
 
     override fun onDestroyView() {

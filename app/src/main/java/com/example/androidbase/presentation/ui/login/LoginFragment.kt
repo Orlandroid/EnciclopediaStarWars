@@ -1,7 +1,7 @@
 package com.example.androidbase.presentation.ui.login
 
-import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.androidbase.R
 import com.example.androidbase.databinding.FragmentLoginBinding
 import com.example.androidbase.domain.entities.remote.login.LoginErrorResponse
@@ -25,6 +25,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
         }
         binding.edEmailormobileLogin.onTextChanged { caneEnableButton() }
         binding.edPasswordLogin.onTextChanged { caneEnableButton() }
+        binding.edEmailormobileLogin.setText("atuny0")
+        binding.edPasswordLogin.setText("9uQFF1Lh")
     }
 
     override fun observerViewModel() {
@@ -38,7 +40,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
                 }
             }
         ) {
-            requireContext().showToast("Bienbenido al sistema")
+            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToProductsFragment())
         }
     }
 

@@ -44,6 +44,10 @@ fun <T> Fragment.observeApiResult(
                 }
             }
 
+            is Result.SocketTimeoutException -> {
+                showErrorApi(shouldCloseTheViewOnApiError)
+            }
+
             is Result.ErrorNetwork -> {
                 showErrorNetwork(shouldCloseTheViewOnApiError)
             }

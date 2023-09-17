@@ -8,9 +8,10 @@ import android.widget.EditText
 import android.widget.ImageView
 import androidx.annotation.ColorRes
 import androidx.core.widget.doOnTextChanged
-import androidx.databinding.adapters.TextViewBindingAdapter.OnTextChanged
 import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 
 
 fun View.visible() {
@@ -53,6 +54,11 @@ fun View.takeScreenshot(): Bitmap {
     this.draw(canvas)
     return bitmap
 }
+
+fun ImageView.loadImage(urlImage: String) {
+    Glide.with(context).load(urlImage).into(this)
+}
+
 
 fun EditText.obtainText(): String {
     return text.toString().trim()

@@ -13,4 +13,12 @@
         <item name="android:statusBarColor">@color/primary</item>
         <!-- Customize your theme here. -->
     </style>
+    <style name="AppTheme.PopupOverlay.toolbar" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:colorControlNormal">@color/white</item>
+        <item name="iconTint">@color/white</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="colorAccent">@color/white</item>
+        <item name="android:textColorHint">@color/white</item>
+        <item name="android:tint">@color/white</item>
+    </style>
 </resources>
