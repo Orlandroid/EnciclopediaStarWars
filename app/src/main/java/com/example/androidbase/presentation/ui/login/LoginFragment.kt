@@ -13,10 +13,13 @@ import com.example.androidbase.presentation.extensions.observeApiResult
 import com.example.androidbase.presentation.extensions.obtainText
 import com.example.androidbase.presentation.extensions.onTextChanged
 import com.example.androidbase.presentation.extensions.showToast
+import com.example.androidbase.presentation.ui.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login) {
+
+    override fun configSearchView() = MainActivity.SearchViewConfig(showSearchView = true)
 
     private val viewModel: LoginViewModel by viewModels()
     override fun setUpUi() {
@@ -32,6 +35,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
     override fun observerViewModel() {
         super.observerViewModel()
         observeApiResult(viewModel.loginResponse,
+            isLoadingState = {
+                binding.buttonLogin.isEnabled = !it
+            },
             onError = {
                 it.fromJson<LoginErrorResponse>().let { reponse ->
                     if (reponse.message == "Invalid credentials") {

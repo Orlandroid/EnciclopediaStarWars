@@ -1,4 +1,4 @@
-package com.example.presentation.ui
+package com.example.androidbase.presentation.ui
 
 import android.os.Bundle
 import android.view.Menu
@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
         if (shouldShow) {
             binding.toolbarLayout.root.visible()
         } else {
-            binding.toolbarLayout.root.visible()
+            binding.toolbarLayout.root.gone()
         }
     }
 

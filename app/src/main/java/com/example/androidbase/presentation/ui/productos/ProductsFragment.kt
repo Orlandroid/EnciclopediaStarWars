@@ -5,7 +5,7 @@ import com.example.androidbase.R
 import com.example.androidbase.databinding.FragmentProductsBinding
 import com.example.androidbase.presentation.base.BaseFragment
 import com.example.androidbase.presentation.extensions.observeApiResult
-import com.example.presentation.ui.MainActivity
+import com.example.androidbase.presentation.ui.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -15,7 +15,15 @@ class ProductsFragment : BaseFragment<FragmentProductsBinding>(R.layout.fragment
     private val viewModel: ProductsViewModel by viewModels()
     private val adapter = ProductsAdapter()
 
-    override fun configSearchView() = MainActivity.SearchViewConfig(showSearchView = true)
+    override fun configureToolbar() = MainActivity.ToolbarConfiguration(
+        showToolbar = true,
+        toolbarTitle = getString(R.string.productos)
+    )
+
+    override fun configSearchView() = MainActivity.SearchViewConfig(
+        showSearchView = true
+    )
+
     override fun setUpUi() {
         viewModel.getProducts()
         binding.homeRecyclerView.adapter = adapter

@@ -14,14 +14,11 @@ import retrofit2.HttpException
 import java.net.SocketTimeoutException
 
 abstract class BaseViewModel constructor(
-    protected val coroutineDispatchers: CoroutineDispatchers,
-    val networkHelper: NetworkHelper
+    protected val coroutineDispatchers: CoroutineDispatchers, val networkHelper: NetworkHelper
 ) : ViewModel() {
 
     enum class ErrorType {
-        NETWORK,
-        TIMEOUT,
-        UNKNOWN
+        NETWORK, TIMEOUT, UNKNOWN
     }
 
     suspend inline fun <T> safeApiCall(
@@ -52,6 +49,7 @@ abstract class BaseViewModel constructor(
                                 errorCode = errorCode ?: -1,
                                 errorBody = errorBody ?: ""
                             )
+
                         }
 
                         is SocketTimeoutException -> result.value = Result.SocketTimeoutException()

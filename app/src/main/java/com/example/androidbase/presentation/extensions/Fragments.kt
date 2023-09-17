@@ -6,7 +6,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.androidbase.R
 import com.example.androidbase.presentation.alerts.MainAlert
 import com.example.androidbase.presentation.alerts.MainAlert.Companion.ERROR_MESSAGE
-import com.example.presentation.ui.MainActivity
+import com.example.androidbase.presentation.ui.MainActivity
 
 
 fun Fragment.showProgress() {

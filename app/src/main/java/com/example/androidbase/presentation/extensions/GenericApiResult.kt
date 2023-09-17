@@ -6,6 +6,7 @@ import com.example.androidbase.domain.state.Result
 
 fun <T> Fragment.observeApiResult(
     liveData: LiveData<Result<T>>,
+    isLoadingState: (Boolean) -> Unit = {},
     onLoading: () -> Unit = { },
     onFinishLoading: () -> Unit = { },
     haveTheViewProgress: Boolean = true,
@@ -14,7 +15,7 @@ fun <T> Fragment.observeApiResult(
     noData: () -> Unit = {},
     onSuccess: (data: T) -> Unit,
 ) {
-    liveData.observe(viewLifecycleOwner) { apiState ->
+    liveData.observeAsEvent(viewLifecycleOwner) { apiState ->
         fun handleStatusOnLoading(isLoading: Boolean) {
             if (isLoading) {
                 onLoading()
@@ -24,6 +25,7 @@ fun <T> Fragment.observeApiResult(
         }
 
         val isLoading = apiState is Result.Loading
+        isLoadingState(isLoading)
         if (haveTheViewProgress) {
             shouldShowProgress(isLoading)
         } else {
