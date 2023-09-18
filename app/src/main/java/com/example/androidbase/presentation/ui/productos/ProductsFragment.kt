@@ -7,6 +7,7 @@ import com.example.androidbase.presentation.base.BaseFragment
 import com.example.androidbase.presentation.extensions.observeApiResult
 import com.example.androidbase.presentation.ui.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
+import org.imaginativeworld.whynotimagecarousel.model.CarouselItem
 
 
 @AndroidEntryPoint
@@ -27,6 +28,27 @@ class ProductsFragment : BaseFragment<FragmentProductsBinding>(R.layout.fragment
     override fun setUpUi() {
         viewModel.getProducts()
         binding.homeRecyclerView.adapter = adapter
+        setCarousel()
+    }
+
+    private fun setCarousel() {
+        val list = mutableListOf<CarouselItem>()
+        list.add(
+            CarouselItem(
+                imageDrawable = R.drawable.hot_sale
+            )
+        )
+        list.add(
+            CarouselItem(
+                imageDrawable = R.drawable.hot_sale2
+            )
+        )
+        list.add(
+            CarouselItem(
+                imageDrawable = R.drawable.hot_sale3
+            )
+        )
+        binding.carousel.setData(list)
     }
 
     override fun observerViewModel() {

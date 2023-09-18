@@ -7,6 +7,48 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <org.imaginativeworld.whynotimagecarousel.ImageCarousel
+            android:id="@+id/carousel"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            app:autoPlay="false"
+            app:autoPlayDelay="3000"
+            app:autoWidthFixing="true"
+            app:bottomShadowAlpha="0.6"
+            app:bottomShadowHeight="64dp"
+            app:captionMargin="0dp"
+            app:captionTextSize="14sp"
+            app:carouselBackground="#00000000"
+            app:carouselGravity="CENTER"
+            app:carouselPadding="0dp"
+            app:carouselPaddingBottom="0dp"
+            app:carouselPaddingEnd="0dp"
+            app:carouselPaddingStart="0dp"
+            app:carouselPaddingTop="0dp"
+            app:carouselType="BLOCK"
+            app:imageScaleType="centerCrop"
+            app:indicatorMargin="0dp"
+            app:infiniteCarousel="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:nextButtonId="@id/btn_next"
+            app:nextButtonLayout="@layout/next_button_layout"
+            app:nextButtonMargin="4dp"
+            app:previousButtonId="@id/btn_previous"
+            app:previousButtonLayout="@layout/previous_button_layout"
+            app:previousButtonMargin="4dp"
+            app:scaleOnScroll="false"
+            app:scalingFactor="0.15"
+            app:showBottomShadow="true"
+            app:showCaption="true"
+            app:showIndicator="true"
+            app:showNavigationButtons="true"
+            app:showTopShadow="true"
+            app:topShadowAlpha="0.6"
+            app:topShadowHeight="32dp"
+            app:touchToPause="true" />
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/home_recycler_view"
@@ -16,7 +58,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/carousel"
             app:spanCount="2"
             tools:listitem="@layout/item_product" />
 
