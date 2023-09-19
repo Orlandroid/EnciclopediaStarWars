@@ -5,10 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.androidbase.databinding.ItemProductBinding
 import com.example.androidbase.domain.entities.remote.products.Product
+import com.example.androidbase.presentation.extensions.click
 import com.example.androidbase.presentation.extensions.loadImage
 
 
-class ProductsAdapter : RecyclerView.Adapter<ProductsAdapter.ViewHolder>() {
+class ProductsAdapter(private val clickOnProduct: (Product) -> Unit) :
+    RecyclerView.Adapter<ProductsAdapter.ViewHolder>() {
 
     private var listOfCategories: List<Product> = arrayListOf()
 
@@ -18,9 +20,12 @@ class ProductsAdapter : RecyclerView.Adapter<ProductsAdapter.ViewHolder>() {
     }
 
 
-    class ViewHolder(private val binding: ItemProductBinding) :
+    inner class ViewHolder(private val binding: ItemProductBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(product: Product) = with(binding) {
+            binding.root.click {
+                clickOnProduct(product)
+            }
             itemImage.loadImage(product.images[0])
             itemTitle.text = product.title
             itemPrice.text = product.price.toString()

@@ -18,5 +18,18 @@
         android:id="@+id/productsFragment"
         android:name="com.example.androidbase.presentation.ui.productos.ProductsFragment"
         android:label="ProductsFragment"
-        tools:layout="@layout/fragment_products" />
+        tools:layout="@layout/fragment_products">
+        <action
+            android:id="@+id/action_productsFragment_to_productsDetailFragment"
+            app:destination="@id/productsDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/productsDetailFragment"
+        android:name="com.example.androidbase.presentation.ui.products_detail.ProductsDetailFragment"
+        android:label="ProductsDetailFragment"
+        tools:layout="@layout/fragment_products_detail" >
+        <argument
+            android:name="product"
+            app:argType="string" />
+    </fragment>
 </navigation>

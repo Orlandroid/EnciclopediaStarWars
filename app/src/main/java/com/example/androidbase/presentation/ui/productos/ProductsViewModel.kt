@@ -26,6 +26,9 @@ class ProductsViewModel @Inject constructor(
     val productsResponse: LiveData<Result<ProductResponse>>
         get() = _productsResponse
 
+    init {
+        getProducts()
+    }
 
     fun getProducts() {
         viewModelScope.launch {

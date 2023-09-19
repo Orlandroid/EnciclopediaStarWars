@@ -26,4 +26,5 @@
     <string name="no_internet_connection">No Internet Connection</string>
     <string name="usuario">Usuario</string>
     <string name="productos">Productos</string>
+    <string name="no_se_encontraron_resultados">No se encontraron resultados</string>
 </resources>
