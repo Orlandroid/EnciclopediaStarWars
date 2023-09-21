@@ -12,7 +12,6 @@ import kotlinx.serialization.encoding.Decoder
 import kotlinx.serialization.encoding.Encoder
 
 @Parcelize
-@Serializable
 data class Resource(
     val id: Int,
     val title: String,

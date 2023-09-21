@@ -12,6 +12,7 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
@@ -49,8 +50,8 @@ object ModuleApi {
     @Provides
     fun provideRetrofit(okHttpClient: OkHttpClient, json: Json): Retrofit = Retrofit.Builder()
         .baseUrl(BASE_URL)
-        .addConverterFactory(json.asConverterFactory(contentType))
-        //.addConverterFactory(GsonConverterFactory.create())
+        //.addConverterFactory(json.asConverterFactory(contentType))
+        .addConverterFactory(GsonConverterFactory.create())
         .client(okHttpClient)
         .build()
 
