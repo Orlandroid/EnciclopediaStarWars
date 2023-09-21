@@ -2,14 +2,16 @@ package com.example.androidbase.data.di
 
 
 import com.example.androidbase.data.remote.api.DummyJsonApi
+import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import kotlinx.serialization.json.Json
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
@@ -19,7 +21,14 @@ import javax.inject.Singleton
 object ModuleApi {
 
 
-    private const val BASE_URL_DUMMY_JSON = "https://dummyjson.com/"
+    val contentType = "application/json".toMediaType()
+    private val BASE_URL =
+        "https://raw.githubusercontent.com/Orlandroid/Resources_Repos/main/fakesResponsesApis/"
+
+
+    @Provides
+    @Singleton
+    fun json(): Json = Json { ignoreUnknownKeys = true }
 
     @Singleton
     @Provides
@@ -38,9 +47,10 @@ object ModuleApi {
 
     @Singleton
     @Provides
-    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
-        .baseUrl(BASE_URL_DUMMY_JSON)
-        .addConverterFactory(GsonConverterFactory.create())
+    fun provideRetrofit(okHttpClient: OkHttpClient, json: Json): Retrofit = Retrofit.Builder()
+        .baseUrl(BASE_URL)
+        .addConverterFactory(json.asConverterFactory(contentType))
+        //.addConverterFactory(GsonConverterFactory.create())
         .client(okHttpClient)
         .build()
 

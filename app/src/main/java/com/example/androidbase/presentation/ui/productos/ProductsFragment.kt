@@ -7,7 +7,6 @@ import com.example.androidbase.databinding.FragmentProductsBinding
 import com.example.androidbase.domain.entities.remote.products.Product
 import com.example.androidbase.presentation.base.BaseFragment
 import com.example.androidbase.presentation.extensions.gone
-import com.example.androidbase.presentation.extensions.hideKeyboard
 import com.example.androidbase.presentation.extensions.observeApiResult
 import com.example.androidbase.presentation.extensions.toJson
 import com.example.androidbase.presentation.extensions.visible
