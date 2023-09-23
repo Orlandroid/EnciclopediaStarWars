@@ -6,6 +6,7 @@ import com.example.androidbase.domain.entities.remote.products.ProductResponse
 class ProductsRepositoryImp(private val api: DummyJsonApi) : ProductsRepository {
 
     override suspend fun getProducts(): ProductResponse = api.getProducts()
+    override suspend fun getSingleProduct(productId:Int) = api.getSingleProduct(productId)
 
 
 }
