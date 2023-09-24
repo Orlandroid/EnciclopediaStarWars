@@ -3,17 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_navigation"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/productsFragment">
 
-    <fragment
-        android:id="@+id/loginFragment"
-        android:name="com.example.androidbase.presentation.ui.login.LoginFragment"
-        android:label="LoginFragment"
-        tools:layout="@layout/fragment_login">
-        <action
-            android:id="@+id/action_loginFragment_to_productsFragment"
-            app:destination="@id/productsFragment" />
-    </fragment>
     <fragment
         android:id="@+id/productsFragment"
         android:name="com.example.androidbase.presentation.ui.productos.ProductsFragment"

@@ -23,7 +23,9 @@ class ProductsFragment : BaseFragment<FragmentProductsBinding>(R.layout.fragment
     private val products = arrayListOf<Product>()
 
     override fun configureToolbar() = MainActivity.ToolbarConfiguration(
-        showToolbar = true, toolbarTitle = getString(R.string.productos)
+        showBackArrow = false,
+        showToolbar = true,
+        toolbarTitle = getString(R.string.productos)
     )
 
     override fun configSearchView() =

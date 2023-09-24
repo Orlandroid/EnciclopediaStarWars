@@ -3,6 +3,7 @@ package com.example.androidbase.presentation.ui.login
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.androidbase.R
+import com.example.androidbase.data.preferences.LoginPreferences
 import com.example.androidbase.databinding.FragmentLoginBinding
 import com.example.androidbase.domain.entities.remote.login.LoginErrorResponse
 import com.example.androidbase.domain.entities.remote.login.LoginRequest
@@ -15,14 +16,20 @@ import com.example.androidbase.presentation.extensions.onTextChanged
 import com.example.androidbase.presentation.extensions.showToast
 import com.example.androidbase.presentation.ui.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login) {
 
+    @Inject
+    lateinit var loginPreferences: LoginPreferences
     override fun configSearchView() = MainActivity.SearchViewConfig(showSearchView = true)
 
     private val viewModel: LoginViewModel by viewModels()
     override fun setUpUi() {
+        loginPreferences.getUserSession().let {
+            findNavController().setGraph(R.navigation.main_navigation)
+        }
         binding.buttonLogin.click {
             viewModel.login(getBodyLogin())
         }
@@ -46,7 +53,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
                 }
             }
         ) {
-            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToProductsFragment())
+            loginPreferences.saveUserSession()
+            findNavController().setGraph(R.navigation.main_navigation)
         }
     }
 

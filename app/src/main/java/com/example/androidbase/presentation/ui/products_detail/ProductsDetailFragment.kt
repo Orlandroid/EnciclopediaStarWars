@@ -25,7 +25,7 @@ class ProductsDetailFragment :
     )
 
     override fun setUpUi() {
-
+        binding.skeletonLayout.showSkeleton()
         viewModel.getSingleProduct(args.product.fromJson<Product>().id)
     }
 
@@ -33,9 +33,11 @@ class ProductsDetailFragment :
         super.observerViewModel()
         observeApiResult(
             viewModel.singleProductResponse,
+            haveTheViewProgress = false,
             shouldCloseTheViewOnApiError = true,
-            onLoading = { binding.skeletonLayout.showSkeleton() },
-            onFinishLoading = { binding.skeletonLayout.showOriginal() }) {
+            onFinishLoading = {
+                binding.skeletonLayout.showOriginal()
+            }) {
             bind(it)
         }
     }
