@@ -25,7 +25,15 @@ class ProductsFragment : BaseFragment<FragmentProductsBinding>(R.layout.fragment
     override fun configureToolbar() = MainActivity.ToolbarConfiguration(
         showBackArrow = false,
         showToolbar = true,
-        toolbarTitle = getString(R.string.productos)
+        toolbarTitle = getString(R.string.productos),
+        profileIcon = configureProfileIcon()
+    )
+
+    private fun configureProfileIcon() = MainActivity.ProfileIcon(
+        showProfileIcon = true,
+        clickOnProfileIcon = {
+            findNavController().navigate(ProductsFragmentDirections.actionProductsFragmentToProfileFragment())
+        }
     )
 
     override fun configSearchView() =

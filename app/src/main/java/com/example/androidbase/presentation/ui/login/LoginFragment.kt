@@ -28,7 +28,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
     private val viewModel: LoginViewModel by viewModels()
     override fun setUpUi() {
         loginPreferences.getUserSession().let {
-            findNavController().setGraph(R.navigation.main_navigation)
+            if (it) {
+                findNavController().setGraph(R.navigation.main_navigation)
+            }
         }
         binding.buttonLogin.click {
             viewModel.login(getBodyLogin())

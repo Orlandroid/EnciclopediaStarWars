@@ -58,6 +58,17 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun configureProfileIcon(configuration: ProfileIcon) {
+        if (configuration.showProfileIcon) {
+            binding.toolbarLayout.profile.visible()
+        } else {
+            binding.toolbarLayout.profile.gone()
+        }
+        binding.toolbarLayout.profile.click {
+            configuration.clickOnProfileIcon()
+        }
+    }
+
     private fun setOnBackButton(clickOnBack: (() -> Unit)?) = with(binding) {
         val clickOnBackButton = if (clickOnBack == null) {
             {
@@ -82,6 +93,7 @@ class MainActivity : AppCompatActivity() {
         changeTitleToolbar(configuration.toolbarTitle)
         showToolbar(configuration.showToolbar)
         showBackArrow(configuration.showBackArrow)
+        configureProfileIcon(configuration.profileIcon)
     }
 
 
@@ -160,7 +172,13 @@ class MainActivity : AppCompatActivity() {
         val showToolbar: Boolean = false,
         val showBackArrow: Boolean = true,
         val clickOnBack: (() -> Unit)? = null,
-        val toolbarTitle: String = ""
+        val toolbarTitle: String = "",
+        val profileIcon: ProfileIcon = ProfileIcon(),
+    )
+
+    data class ProfileIcon(
+        val showProfileIcon: Boolean = false,
+        val clickOnProfileIcon: () -> Unit = {}
     )
 
 

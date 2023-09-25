@@ -28,4 +28,6 @@
     <string name="productos">Productos</string>
     <string name="no_se_encontraron_resultados">No se encontraron resultados</string>
     <string name="detalle_product">Detalle Producto</string>
+    <string name="historial">Historial de citas</string>
+    <string name="cerrar_sesi_n">Cerrar sesión</string>
 </resources>
