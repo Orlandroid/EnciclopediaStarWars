@@ -2,6 +2,7 @@ package com.example.androidbase.data.di
 
 
 import com.example.androidbase.data.remote.api.DummyJsonApi
+import com.example.androidbase.data.remote.api.FakeUsersApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -11,6 +12,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
+import javax.inject.Named
 import javax.inject.Singleton
 
 
@@ -20,6 +22,8 @@ object ModuleApi {
 
 
     private const val BASE_URL_DUMMY_JSON = "https://dummyjson.com/"
+    private const val FAKE_USERS_URL = "https://randomuser.me/"
+    private const val FAKE_USERS = "FakeUsers"
 
     @Singleton
     @Provides
@@ -46,8 +50,23 @@ object ModuleApi {
 
     @Singleton
     @Provides
+    @Named(FAKE_USERS)
+    fun provideRetrofitFakeUsers(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
+        .baseUrl(FAKE_USERS_URL)
+        .addConverterFactory(GsonConverterFactory.create())
+        .client(okHttpClient)
+        .build()
+
+    @Singleton
+    @Provides
     fun provideApiService(retrofit: Retrofit): DummyJsonApi =
         retrofit.create(DummyJsonApi::class.java)
+
+
+    @Singleton
+    @Provides
+    fun provideApiServiceFakeUsers(@Named(FAKE_USERS) retrofit: Retrofit): FakeUsersApi =
+        retrofit.create(FakeUsersApi::class.java)
 
 
 }

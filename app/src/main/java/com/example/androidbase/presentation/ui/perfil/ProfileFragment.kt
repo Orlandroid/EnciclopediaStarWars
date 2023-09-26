@@ -1,12 +1,17 @@
 package com.example.androidbase.presentation.ui.perfil
 
 import android.content.Intent
+import android.util.Log
+import androidx.fragment.app.viewModels
 import com.example.androidbase.R
 import com.example.androidbase.data.preferences.LoginPreferences
 import com.example.androidbase.databinding.FragmentPerfilBinding
+import com.example.androidbase.domain.entities.remote.People
 import com.example.androidbase.presentation.base.BaseFragment
 import com.example.androidbase.presentation.extensions.click
+import com.example.androidbase.presentation.extensions.observeApiResult
 import com.example.androidbase.presentation.ui.MainActivity
+import com.example.androidbase.presentation.ui.people.PeopleViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import kotlin.math.log
@@ -16,6 +21,9 @@ class ProfileFragment : BaseFragment<FragmentPerfilBinding>(R.layout.fragment_pe
 
     @Inject
     lateinit var loginPreferences: LoginPreferences
+
+
+    private val viewModel: ProfileViewModel by viewModels()
 
     override fun configureToolbar() = MainActivity.ToolbarConfiguration(
         showToolbar = true,
@@ -28,6 +36,13 @@ class ProfileFragment : BaseFragment<FragmentPerfilBinding>(R.layout.fragment_pe
         adapter.setData(setElementsMenu())
         binding.btnCloseSession.click {
             logOut()
+        }
+    }
+
+    override fun observerViewModel() {
+        super.observerViewModel()
+        observeApiResult(viewModel.getMeResponse) {
+            Log.w("Android", "Succes")
         }
     }
 
